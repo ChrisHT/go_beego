@@ -1,11 +1,9 @@
 package models
 
 import (
-	"fmt"
-	"io"
 	"time"
 	"go_beego/models/mongodb"
-	"golang.org/x/crypto/scrypt"
+	// "golang.org/x/crypto/scrypt"
 	"gopkg.in/mgo.v2"
 )
 
@@ -28,7 +26,7 @@ func (u *User) FindByID(id string) (code int, err error) {
 		if err == mgo.ErrNotFound {
 			code = ErrNotFound
 		} else {
-			code = ErrDatabase
+			code = 1
 		}
 	} else {
 		code = 0

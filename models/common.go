@@ -10,10 +10,10 @@ type CodeMsg struct {
 	Msg string `json:"msg"`
 }
 
-func NewErrorMsg(msg string) *CodeMsg {
-	return &CodeMsg{1, msg}
+func NewErrorMsg(Msg string) *CodeMsg {
+	return &CodeMsg{1, Msg}
 }
 
-func NewNormalMsg(info string) *CodeMsg {
-	return &CodeMsg{0, msg}
+func NewNormalMsg(Msg string) *CodeMsg {
+	return &CodeMsg{0, Msg}
 }
