@@ -34,3 +34,32 @@ func (this *UserLoginController) Post() {
 	this.Data["json"] = map[string]interface{}{"code": 0, "message": res}
 	this.ServeJSON()
 }
+
+
+type UserRegisterController struct {
+	beego.Controller
+}
+
+func (this *UserRegisterController) Post() {
+	name := this.GetString("name")
+	password := this.GetString("password")
+	if password == "" {
+		this.Data["json"] = map[string]interface{}{"code": 1, "message": "password错误"}
+		this.ServeJSON()
+		return
+	}
+
+	if name == "" {
+		this.Data["json"] = map[string]interface{}{"code": 1, "message": "name错误"}
+		this.ServeJSON()
+		return
+	}
+	user := models.User{}
+	if code, err := user.Insert(); err != nil {
+		this.Data["json"] = map[string]interface{}{"code": code, "message": err}
+		this.ServeJSON()
+	} else {
+		this.Data["json"] = map[string]interface{}{"code": 0, "message": "success"}
+		this.ServeJSON()
+	}
+}

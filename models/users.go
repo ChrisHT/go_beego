@@ -33,3 +33,22 @@ func (u *User) FindByID(id string) (code int, err error) {
 	}
 	return
 }
+
+func (u *User) Insert() (code int, err error) {
+	Conn := mongo.Conn()
+	defer Conn.Close()
+
+	c := Conn.DB("").C("users")
+	err = c.Insert(u)
+
+	if err != nil {
+		if err == mgo.ErrNotFound {
+			code = ErrNotFound
+		} else {
+			code = 1
+		}
+	} else {
+		code = 0
+	}
+	return
+}
