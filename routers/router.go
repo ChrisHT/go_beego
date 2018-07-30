@@ -2,14 +2,17 @@ package routers
 
 import (
 	"github.com/astaxie/beego"
-	"go_beego/controllers/users"
+	"go_beego/controllers/user"
 	"go_beego/controllers/index"
-	"go_beego/controllers/warn"
 )
 
 func init() {
-	beego.Router("/", &index.IndexController{})
-	beego.Router("/warnning", &warn.WarnController{})
-	beego.Router("/user/login", &users.UserLoginController{})
-	beego.Router("/user/register", &users.UserRegisterController{})
+	beego.Router("/", &index.IndexController{}, "get:Index")
+	ns := beego.NewNamespace("/api/v1",
+		beego.NSNamespace("/user",
+			//beego.NSRouter("/register", &user.UserController{}, "post:Register"),
+			beego.NSRouter("/login", &user.UserController{}, "post:Login"),
+		),
+	)
+	beego.AddNamespace(ns)
 }
