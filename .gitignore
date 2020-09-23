@@ -5,7 +5,7 @@
 *.so
 *.dylib
 go_beego
-
+.idea
 # Test binary, build with `go test -c`
 *.test
 
